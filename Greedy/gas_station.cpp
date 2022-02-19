@@ -7,27 +7,49 @@ class Solution {
 public:
     int canCompleteCircuit(vector<int>& fuel,vector<int>& cost) {
         int n = fuel.size();
-        int fuelSum = 0;
-        int costSum = 0;
+        int start = 0;
+        int total = 0;
+        int prev = 0;
         for(int i = 0 ; i < n ; i++) {
-            fuelSum += fuel[i];
-            costSum += cost[i];
-        }
-        if(fuelSum < costSum)
-            return -1;
-        
-        int tot = 0;
-        int ans = 0;
-        for(int i = 0 ; i < n ; i++) {
-            tot += fuel[i] - cost[i];
-            if(tot < 0) {
-                tot = 0;
-                ans = i+1;
+            total += fuel[i] - cost[i];
+            if(total < 0) {
+                prev += total;
+                total = 0;
+                start = i + 1;
             }
         }
-        return ans;
+        if(prev + total < 0)
+            return -1;
+        else
+            return start;
     }
 };
+
+// class Solution {
+// public:
+//     int canCompleteCircuit(vector<int>& fuel,vector<int>& cost) {
+//         int n = fuel.size();
+//         int fuelSum = 0;
+//         int costSum = 0;
+//         for(int i = 0 ; i < n ; i++) {
+//             fuelSum += fuel[i];
+//             costSum += cost[i];
+//         }
+//         if(fuelSum < costSum)
+//             return -1;
+        
+//         int tot = 0;
+//         int ans = 0;
+//         for(int i = 0 ; i < n ; i++) {
+//             tot += fuel[i] - cost[i];
+//             if(tot < 0) {
+//                 tot = 0;
+//                 ans = i+1;
+//             }
+//         }
+//         return ans;
+//     }
+// };
 
 // O(N^2)
 // class Solution {
