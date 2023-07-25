@@ -4,19 +4,23 @@ using namespace std;
 
 class Solution {
 public:
-    void countPrimes(int n) {
-        vector<int> primes(n,1);
-        for(int i = 2 ; i*i < n ; i++) {
+    int countPrimes(int n) {
+        vector<int> primes(n+1,1);
+        for(int i = 2 ; i*i <= n ; i++) {
             if(primes[i]) {
-                for(int j = i ; i*j < n ; j++)
-                    primes[i*j] = 0;
+                for(int j = i*i ; j <= n ; j += i)
+                    primes[j] = 0;
             }
         }
         int ans = 0;
-        for(int i = 2 ; i < n ; i++)
-            if(primes[i])
+        for(int i = 2 ; i <= n ; i++) {
+            if(primes[i]) {
                 cout<<i<<" ";
+                ans++;
+            }
+        }
         cout<<endl;
+        return ans;
     }
 };
 
@@ -59,6 +63,6 @@ public:
 
 int main() {
     Solution s;
-    s.countPrimes(50);
+    cout<<s.countPrimes(50);
     return 0;
 }

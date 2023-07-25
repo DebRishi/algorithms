@@ -3,10 +3,10 @@ using namespace std;
 
 struct ListNode {
     int val;
-    ListNode *next;
+    ListNode* next;
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode *next) : val(x), next(next) {}
+    ListNode(int x,ListNode* next) : val(x), next(next) {}
 };
 
 class Solution {
@@ -27,17 +27,10 @@ class Solution {
                 list2 = list2->next;
             }
         }
-        while(list1) {
+        if(list1)
             dnode->next = list1;
-            dnode = dnode->next;
-            list1 = list1->next;
-        }
-        while(list2) {
+        if(list2)
             dnode->next = list2;
-            dnode = dnode->next;
-            list2 = list2->next;
-        }
-        dnode->next = 0;
         return dummy->next;
     }
     
